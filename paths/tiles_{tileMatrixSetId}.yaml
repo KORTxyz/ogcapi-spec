@@ -1,0 +1,17 @@
+get:
+  operationId: getTileJSON
+  tags:
+    - Dataset Tiles
+  summary: get TileMatrixSet
+  description: Fetch description of a specific tilematrixset
+  parameters:
+    - $ref: ..\components\parameters\tileMatrixSetId.yaml
+  responses:
+    '200':
+      description: tilejson
+      content:
+        application/json:
+          schema:
+            type: object
+    '500':
+      $ref: ..\components\responses\ServerError.yaml

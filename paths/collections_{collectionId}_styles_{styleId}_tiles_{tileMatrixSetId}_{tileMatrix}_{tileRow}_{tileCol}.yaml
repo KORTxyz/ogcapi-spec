@@ -1,0 +1,21 @@
+get:
+  operationId: getCollectionStyleTile
+  tags:
+    - Styled Tiles
+  summary: get Tile
+  description: Fetches a single styled tile from a collection
+  parameters:
+    - $ref: ..\components\parameters\collectionId.yaml
+    - $ref: ..\components\parameters\styleId.yaml
+    - $ref: ..\components\parameters\tileMatrixSetId.yaml
+    - $ref: ..\components\parameters\tileMatrix.yaml
+    - $ref: ..\components\parameters\tileRow.yaml
+    - $ref: ..\components\parameters\tileCol.yaml
+  responses:
+    '200':
+      description: Tile
+      content:
+        image/*:
+          schema:
+            type: string
+            format: binary

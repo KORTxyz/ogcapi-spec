@@ -1,0 +1,171 @@
+get:
+  tags:
+    - Use styles
+  summary: fetch the metadata about a style
+  description: |-
+    Style metadata is essential information about a style
+    in order to support users to discover and select styles
+    for rendering their data and for visual style editors
+    to create user interfaces for editing a style.
+
+    This operations returns the metadata for the requested
+    style as a single document.
+
+    The stylesheet of the style will typically include some
+    the metadata, too.
+  operationId: getStyleMetadata
+  parameters:
+    - $ref: ..\components\parameters\styleId.yaml
+    - $ref: ..\components\parameters\f-json.yaml
+  responses:
+    '200':
+      description: The metdata for the style.
+      content:
+        application/json:
+          schema:
+            $ref: ..\components\schemas\style-metadata.yaml
+    '404':
+      description: style not found
+put:
+  tags:
+    - Manage styles
+  summary: update the metadata document of a style
+  description: |-
+    Update the style metadata for the style with the
+    id `styleId`. This operation updates the complete
+    metadata document.
+
+    This operation is only available to registered style
+    authors.
+  operationId: updateStyleMetadata
+  security:
+    - BasicAuth: []
+  parameters:
+    - $ref: ..\components\parameters\styleId.yaml
+  requestBody:
+    description: The metadata of a style.
+    content:
+      application/json:
+        schema:
+          $ref: ..\components\schemas\style-metadata.yaml
+  responses:
+    '204':
+      description: style metadata updated
+    '401':
+      description: unauthorized access
+    '404':
+      description: style not found
+patch:
+  tags:
+    - Manage styles
+  summary: update parts of the style metadata
+  description: |-
+    Update selected elements of the style metadata for
+    the style with the id `styleId`.
+
+    The PATCH semantics in this operation are defined by
+    RFC 7396 (JSON Merge Patch). From the specification:
+
+    _"A JSON merge patch document describes changes to be
+    made to a target JSON document using a syntax that
+    closely mimics the document being modified. Recipients
+    of a merge patch document determine the exact set of
+    changes being requested by comparing the content of
+    the provided patch against the current content of the
+    target document. If the provided merge patch contains
+    members that do not appear within the target, those
+    members are added. If the target does contain the
+    member, the value is replaced. Null values in the
+    merge patch are given special meaning to indicate
+    the removal of existing values in the target."_
+
+    Some examples:
+
+    To add or update the point of contact, the access
+    constraint and the revision date, just send
+
+    ```
+    {
+      "pointOfContact": "Jane Doe",
+      "accessConstraints": "restricted",
+      "dates": {
+        "revision": "2019-05-17T11:46:12Z"
+      }
+    }
+    ```
+
+    To remove the point of contact, the access
+    constraint and the revision date, send
+
+    ```
+    {
+      "pointOfContact": null,
+      "accessConstraints": null,
+      "dates": {
+        "revision": null
+      }
+    }
+    ```
+
+    For arrays the complete array needs to be sent.
+    To add a keyword to the example style metadata object, send
+
+    ```
+    {
+      "keywords": [ "basemap", "TDS", "TDS 6.1", "OGC API", "new keyword" ]
+    }
+    ```
+
+    To remove the "TDS" keyword, send
+
+    ```
+    {
+      "keywords": [ "basemap", "TDS 6.1", "OGC API", "new keyword" ]
+    }
+    ```
+
+    To remove the keywords, send
+
+    ```
+    {
+      "keywords": null
+    }
+    ```
+
+    The same applies to `stylesheets` and `layers`. To update
+    these members, you have to send the complete new array value.
+
+    This operation is only available to registered style
+    authors.
+  operationId: patchStyleMetadata
+  security:
+    - BasicAuth: []
+  parameters:
+    - $ref: ..\components\parameters\styleId.yaml
+  requestBody:
+    description: The members of the style metadata object that are updated.
+    content:
+      application/merge-patch+json:
+        schema:
+          $ref: ..\components\schemas\style-metadata.yaml
+  responses:
+    '204':
+      description: style metadata updated
+    '400':
+      description: malformed patch document
+    '401':
+      description: unauthorized access
+    '404':
+      description: style not found
+    '415':
+      description: unsupported patch document
+      headers:
+        Accept-Patch:
+          description: supported patch document media types
+          schema:
+            type: string
+    '422':
+      description: |-
+        unprocessable request, the patch document appears
+        to be valid, but the server is incapable of processing
+        the request

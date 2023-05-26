@@ -1,0 +1,13 @@
+type: object
+required:
+  - links
+  - styles
+properties:
+  links:
+    type: array
+    items:
+      $ref: .\link.yaml
+  styles:
+    type: array
+    items:
+      $ref: .\style.yaml

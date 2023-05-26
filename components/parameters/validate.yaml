@@ -1,0 +1,20 @@
+name: validate
+in: query
+description: |-
+  (part of conformance class 'style-validation') \
+  'yes' creates a new style after successful validation
+  and returns 400, if validation fails,
+  ’no' creates the style without validation and
+  'only' just validates the style without creating a
+  new style and returns 400, if validation fails,
+  otherwise 204.
+required: false
+style: form
+explode: false
+schema:
+  type: string
+  enum:
+    - 'yes'
+    - 'no'
+    - only
+example: only

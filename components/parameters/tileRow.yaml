@@ -1,0 +1,6 @@
+name: tileRow
+in: path
+description: x value for the tile
+required: true
+schema:
+  type: number

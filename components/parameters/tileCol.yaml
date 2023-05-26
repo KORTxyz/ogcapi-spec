@@ -1,0 +1,6 @@
+name: tileCol
+in: path
+description: y value for the tile
+required: true
+schema:
+  type: number

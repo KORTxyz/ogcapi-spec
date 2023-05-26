@@ -1,0 +1,21 @@
+get:
+  operationId: getMap
+  tags:
+    - Maps
+  summary: get Map
+  description: Fetches a rendered map of a style
+  parameters:
+    - $ref: ..\components\parameters\styleId.yaml
+    - $ref: ..\components\parameters\fImage.yaml
+    - $ref: ..\components\parameters\bbox.yaml
+    - $ref: ..\components\parameters\height.yaml
+    - $ref: ..\components\parameters\width.yaml
+
+  responses:
+    '200':
+      description: Map
+      content:
+        image/*:
+          schema:
+            type: string
+            format: binary

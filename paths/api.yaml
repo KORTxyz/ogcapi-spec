@@ -1,0 +1,15 @@
+get:
+  operationId: getAPI
+  tags:
+    - Capabilities
+  summary: get API description
+  description: Description of the API.
+  parameters:
+    - $ref: ..\components\parameters\fCommon.yaml
+  responses:
+    '200':
+      description: The operation was executed successfully.
+    '400':
+      description: >-
+        The server cannot or will not process the request due to an apparent
+        client error. For example, a query parameter had an incorrect value.

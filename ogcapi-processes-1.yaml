@@ -1,0 +1,28 @@
+openapi: 3.0.2
+info:
+  title: OGCAPI
+  version: 0.0.1
+  description: Implemations of OGC API
+  license:
+    name: OGC license
+    url: http://www.ogc.org/legal/
+  contact:
+    email: kortxyz@gmail.com
+tags:
+  - name: Processes
+    description: Processes from the API
+servers:
+  - url: https://localhost
+paths:
+  /processes:
+    $ref: paths/processes.yaml
+  /processes/{processID}:
+    $ref: paths/processes_{processID}.yaml
+  /jobs:
+    $ref: paths/jobs.yaml
+  /processes/{processID}/execution:
+    $ref: paths/processes_{processID}_execution.yaml
+  /jobs/{jobId}:
+    $ref: paths/jobs_{jobId}.yaml
+  /jobs/{jobId}/results:
+    $ref: paths/jobs_{jobId}_results.yaml

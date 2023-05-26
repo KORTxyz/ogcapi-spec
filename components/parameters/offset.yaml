@@ -1,0 +1,11 @@
+name: offset
+in: query
+description: >-
+  The optional offset parameter offset the number of items that are presented in
+  the response document.
+required: false
+schema:
+  type: integer
+  minimum: 0
+  maximum: 999999
+  default: 0

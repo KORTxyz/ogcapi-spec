@@ -1,0 +1,23 @@
+type: object
+required:
+  - type
+  - features
+properties:
+  type:
+    type: string
+    enum:
+      - FeatureCollection
+  features:
+    type: array
+    items:
+      $ref: .\featureGeoJSON.yaml
+  links:
+    type: array
+    items:
+      $ref: .\link.yaml
+  timeStamp:
+    $ref: .\timeStamp.yaml
+  numberMatched:
+    $ref: .\numberMatched.yaml
+  numberReturned:
+    $ref: .\numberReturned.yaml

@@ -1,0 +1,69 @@
+required:
+  - id
+  - matrixHeight
+  - matrixWidth
+  - scaleDenominator
+  - tileHeight
+  - tileWidth
+  - topLeftCorner
+type: object
+properties:
+  title:
+    type: string
+    description: Title of this tile matrix, normally used for display to a human
+    example: Google Maps Compatible for the World zoom level 3
+  abstract:
+    type: string
+    description: Brief narrative description of this tile matrix, normally available
+      for display to a human
+    example: Google Maps Compatible zoom level 3 that is equivalent to a scale
+      of 1:69885283.00358972 and has 19567.87924100512 meters of pixel size
+      in the equator
+  keywords:
+    type: array
+    description: keywords about the elements in the collection
+    items:
+      $ref: .\keyword.yaml
+  id:
+    type: string
+    description: Identifier selecting one of the scales defined in the TileMatrixSet
+      and representing the scaleDenominator the tile.
+    example: "3"
+  scaleDenominator:
+    type: number
+    description: Scale denominator level of this tile matrix
+    example: 69885283.00358972
+  topLeftCorner:
+    type: array
+    description: Position in CRS coordinates of the top-left corner of this 
+      tile matrix
+    example:
+    - -2.00375083427892E7
+    - 2.00375083427892E7
+    items:
+      type: number
+      format: double
+  tileWidth:
+    minimum: 1
+    type: number
+    description: Width of each tile of this tile matrix in pixels
+    format: integer
+    example: 256
+  tileHeight:
+    minimum: 1
+    type: number
+    description: Height of each tile of this tile matrix in pixels
+    format: integer
+    example: 256
+  matrixHeight:
+    minimum: 1
+    type: number
+    description: Width of the matrix (number of tiles in width)
+    format: integer
+    example: 8
+  matrixWidth:
+    minimum: 1
+    type: number
+    description: Height of the matrix (number of tiles in height)
+    format: integer
+    example: 8

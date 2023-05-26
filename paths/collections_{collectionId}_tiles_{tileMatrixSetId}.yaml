@@ -1,0 +1,17 @@
+get:
+  operationId: getCollectionTileJSON
+  tags:
+    - Collection Tiles
+  summary: get TileMatrixSet
+  description: Fetch description of a specific tilematrixset
+  parameters:
+    - $ref: ..\components\parameters\collectionId.yaml
+    - $ref: ..\components\parameters\tileMatrixSetId.yaml
+  responses:
+    '200':
+      description: tilejson
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true

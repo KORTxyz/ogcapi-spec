@@ -1,0 +1,40 @@
+get:
+  summary: retrieve the status of a job
+  description: |
+    Shows the status of a job.
+
+     For more information, see [Section 7.12](https://docs.ogc.org/is/18-062r2/18-062r2.html#sc_retrieve_status_info).
+  operationId: getJobStatus
+  tags:
+    - Processes
+  parameters:
+    - $ref: ..\components\parameters\jobId.yaml
+  responses:
+    '200':
+      description: Status
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true
+delete:
+  summary: cancel a job execution, remove a finished job
+  description: >
+    Cancel a job execution and remove it from the jobs list.
+
+
+    For more information, see [Section
+    13](https://docs.ogc.org/is/18-062r2/18-062r2.html#Dismiss).
+  operationId: deleteJob
+  tags:
+    - Processes
+  parameters:
+    - $ref: ..\components\parameters\jobId.yaml
+  responses:
+    '200':
+      description: Status
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true

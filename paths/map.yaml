@@ -1,0 +1,60 @@
+get:
+  operationId: getMapDesc
+  tags:
+    - Maps
+  summary: Fetch a maps description
+  description: Retrieves the maps description for this collection including the 'links' to get a 'map', and the 'infoTemplate'.
+  responses:
+    '200':
+      description: Metadata about the maps.
+      content:
+        application/json:
+          schema:
+            required:
+              - links
+            type: object
+            properties:
+              styles:
+                type: array
+                items:
+                  type: object
+                  properties:
+                    id:
+                      type: string
+                      example: night
+                    links:
+                      type: array
+                      items:
+                        $ref: ..\components\schemas\link.yaml
+              defaultStyle:
+                  type: string
+                  example: topograhic
+              crs:
+                type: array
+                items: 
+                  type: string
+                  example: http://www.opengis.net/def/crs/OGC/1.3/CRS84
+              crsSpatialExtents:
+                type: array
+                items:
+                  type: object
+              minScaleDenominator: 
+                type: integer
+                example: 10
+              maxScaleDenominator:
+                type: integer
+                example: 100000000
+              recomendedFormat:
+                type: string
+                example: image/jpg
+              maxWidth:
+                type: integer
+                example: 2048
+              maxHeigth:
+                type: integer
+                example: 2048 
+              links:
+                type: array
+                items:
+                  $ref: ../components/schemas/link.yaml
+              

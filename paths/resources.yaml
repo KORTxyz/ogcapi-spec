@@ -1,0 +1,31 @@
+get:
+  tags:
+    - Fetch resources
+  summary: information about the available resources (symbols, sprites)
+  operationId: getResources
+  description: |-
+    This operation fetches the set of resources that have been
+    created and that may be used by reference in stylesheets.
+    Resources in this Style API are symbols and sprites.
+
+    For each resource the id and a link to the resource is provided.
+
+    Testbed-15 only requires support for a limited number of the
+    resources. Therefore, the currently simple approach is sufficient,
+    but in general the operation should support paging (using a
+    parameter `limit` and links to the `next` page in responses).
+  parameters:
+    - $ref: ..\components\parameters\f-json.yaml
+  responses:
+    '200':
+      description: the set of available resources
+      content:
+        application/json:
+          schema:
+            $ref: ..\components\schemas\resource-set.yaml
+    '400':
+      description: invalid or unknown query parameters
+    '406':
+      description: |-
+        The media types accepted by the client are not
+        supported for this resource

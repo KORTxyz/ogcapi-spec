@@ -1,0 +1,14 @@
+required:
+  - keyword
+type: object
+nullable: true
+properties: 
+  keyword:
+    type: string
+    example: land cover
+  code:
+    type: string
+    example: 4612
+  codeSpace:
+    type: string
+    example: https://www.eionet.europa.eu/gemet/en/concept/

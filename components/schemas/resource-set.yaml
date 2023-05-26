@@ -1,0 +1,29 @@
+required:
+  - resources
+type: object
+properties:
+  resources:
+    type: array
+    items:
+      $ref: .\resource-set-entry.yaml
+    example:
+      - id: sprite.json
+        link:
+          href: sprite.json
+          type: application/json
+          rel: '???'
+      - id: sprite.png
+        link:
+          href: sprite.png
+          type: image/png
+          rel: '???'
+      - id: sprite.@2x.png
+        link:
+          href: sprite.@2x.png
+          type: image/png
+          rel: '???'
+      - id: mosque.svg
+        link:
+          href: mosque.svg
+          type: image/svg+xml
+          rel: '???'

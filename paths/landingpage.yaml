@@ -1,0 +1,19 @@
+get:
+  operationId: getLandingpage
+  tags:
+    - Capabilities
+  summary: get Landingpage
+  description: First place a user would normally hit
+  parameters:
+    - $ref: ..\components\parameters\fCommon.yaml
+  responses:
+    '200':
+      description: Landingpage of the API
+      content:
+        application/json:
+          schema:
+            $ref: ..\components\schemas\landingpage.yaml
+    '400':
+      description: >-
+        The server cannot or will not process the request due to an apparent
+        client error. For example, a query parameter had an incorrect value.

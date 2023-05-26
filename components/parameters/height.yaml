@@ -1,0 +1,8 @@
+name: height
+in: query
+description: Height in pixels of map picture.
+required: false
+style: form
+explode: false
+schema:
+  type: number

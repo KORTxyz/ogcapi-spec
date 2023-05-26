@@ -1,0 +1,18 @@
+name: properties
+in: query
+description: |-
+  Only return a subset of properties when every properties of a feature is not needed.
+
+  Examples:
+
+  * A single property: "properties=buildingtype"
+  * Multiple properties: "properties=buildingtype,height,material"
+  * No properties: "properties="
+
+  Properties needs to be part of the feauture else returning an error.
+  
+required: false
+schema:
+  type: string
+style: form
+explode: false

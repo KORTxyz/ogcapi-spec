@@ -1,0 +1,17 @@
+{
+  "name": "@kortxyz/ogcapi-spec",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "joinAPI": "npx @redocly/cli join ogcapi-common-1.yaml ogcapi-features-1.yaml ogcapi-maps-1.yaml ogcapi-styles-1.yaml ogcapi-tiles-1.yaml ogcapi-processes-1.yaml",
+    "joinAPIfeatures": "npx @redocly/cli join ogcapi-common-1.yaml ogcapi-features-1.yaml",
+    "bundleAPI": "npx @redocly/cli bundle ogcapi-common-1.yaml ogcapi-features-1.yaml ogcapi-maps-1.yaml ogcapi-styles-1.yaml ogcapi-tiles-1.yaml ogcapi-processes-1.yaml -o ./bundled"
+  },
+  "keywords": [],
+  "author": "Tino Kastbjerg Stigsen",
+  "license": "ISC",
+  "devDependencies": {
+    "@redocly/cli": "^1.0.0-beta.125"
+  }
+}

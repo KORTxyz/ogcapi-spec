@@ -1,0 +1,13 @@
+get:
+  operationId: getTilesetList
+  tags:
+    - Dataset Tiles
+  summary: get Tileset List
+  description: Fetch a list of tilematrixsets
+  responses:
+    '200':
+      description: list
+      content:
+        application/json:
+          schema:
+            type: object

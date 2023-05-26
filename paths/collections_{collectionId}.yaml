@@ -1,0 +1,20 @@
+get:
+  operationId: getCollection
+  tags:
+    - Capabilities
+  summary: get collection metadata
+  description: Show details about a collection available in the dataset.
+  parameters:
+    - $ref: ..\components\parameters\fCommon.yaml
+    - $ref: ..\components\parameters\collectionId.yaml
+  responses:
+    '200':
+      description: collections metadata
+      content:
+        application/json:
+          schema:
+            $ref: ..\components\schemas\collection.yaml
+    '400':
+      description: >-
+        The server cannot or will not process the request due to an apparent
+        client error. For example, a query parameter had an incorrect value.

@@ -1,0 +1,35 @@
+get:
+  operationId: getItems
+  tags:
+    - Features
+  summary: get Items
+  description: Fetches features in the collection
+  parameters:
+    - $ref: ..\components\parameters\collectionId.yaml
+    - $ref: ..\components\parameters\bbox.yaml
+    - $ref: ..\components\parameters\limit.yaml
+    - $ref: ..\components\parameters\offset.yaml
+    - $ref: ..\components\parameters\datetime.yaml
+    - $ref: ..\components\parameters\properties.yaml
+  responses:
+    '200':
+      description: Items
+      $ref: ..\components\responses\Features.yaml
+post:
+  operationId: postItems
+  tags:
+    - Features
+  summary: post Items
+  description: Add features to the collection in the collection
+  parameters:
+    - $ref: ..\components\parameters\collectionId.yaml
+  requestBody:
+    description: features to be added as geojson
+    required: true
+    content:
+      application/json:
+        schema:
+          $ref: ..\components\schemas\featureCollectionGeoJSON.yaml   
+  responses:
+    '200':
+      description: Success

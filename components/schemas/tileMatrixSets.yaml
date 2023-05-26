@@ -1,0 +1,31 @@
+required:
+  - tileMatrixSets
+type: object
+properties:
+  links:
+    type: array
+    items:
+      $ref: ./link.yaml
+  tileMatrixSets:
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        tileMatrixSetURI:
+          type: string
+        links:
+          type: array
+          items:
+            $ref: ./link.yaml
+
+      example:
+        id: MyWebMercatorQuad
+        title: My Google Maps Compatible for the World
+        links:
+        - href: https://data.example.org/tileMatrixSet/MyWebMercatorQuad
+          rel: item
+          type: application/json

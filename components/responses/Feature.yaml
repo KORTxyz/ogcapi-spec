@@ -1,0 +1,36 @@
+description: |-
+  fetch the feature with id `featureId` in the feature collection
+  with id `collectionId`
+content:
+  application/geo+json:
+    schema:
+      $ref: ..\schemas\featureGeoJSON.yaml
+    example:
+      type: Feature
+      links:
+        - href: http://data.example.com/id/building/123
+          rel: canonical
+          title: canonical URI of the building
+        - href: http://data.example.com/collections/buildings/items/123.json
+          rel: self
+          type: application/geo+json
+          title: this document
+        - href: http://data.example.com/collections/buildings/items/123.html
+          rel: alternate
+          type: text/html
+          title: this document as HTML
+        - href: http://data.example.com/collections/buildings
+          rel: collection
+          type: application/geo+json
+          title: the collection document
+      id: '123'
+      geometry:
+        type: Point
+        coordinates:
+          - 8.66
+          - 15.35
+      properties:
+        function: residential
+        floors: '2'
+        lastUpdate: '2015-08-01T12:34:56Z'
+

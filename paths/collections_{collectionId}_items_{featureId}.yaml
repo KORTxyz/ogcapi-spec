@@ -1,0 +1,13 @@
+get:
+  operationId: getItem
+  tags:
+    - Features
+  summary: get Item
+  description: Fetches a specific feature in the collection
+  parameters:
+    - $ref: ..\components\parameters\collectionId.yaml
+    - $ref: ..\components\parameters\featureId.yaml
+  responses:
+    '200':
+      description: Item
+      $ref: ..\components\responses\Feature.yaml

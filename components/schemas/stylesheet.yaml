@@ -1,0 +1,23 @@
+type: object
+nullable: true
+required:
+  - link
+properties:
+  title:
+    type: string
+    nullable: true
+  version:
+    type: string
+    nullable: true
+  specification:
+    type: string
+    format: url
+    nullable: true
+  native:
+    type: boolean
+    nullable: true
+  tilingScheme:
+    type: string
+    nullable: true
+  link:
+    $ref: ./link.yaml

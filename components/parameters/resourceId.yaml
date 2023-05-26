@@ -1,0 +1,9 @@
+name: resourceId
+in: path
+description: |-
+  Local identifier of a symbol resource. \
+  A list of all available resource can be found
+  under the /resources path.
+required: true
+schema:
+  type: string

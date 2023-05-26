@@ -1,0 +1,5 @@
+type: string
+format: binary
+example: >-
+  M-^IPNG^M^Z^@^@^@^MIHDR^@^@^@^C^@^@^@^C^H^B^@^@^@?J"?^@^@^@ 
+  pHYs^@^@^K^R^@^@^K^R^A??~?^@^@^@^PIDATxM-^\cM-^X??^OA^LXX^@?^O1M-^K??A^@^@^@^@IEND?B`M-^B

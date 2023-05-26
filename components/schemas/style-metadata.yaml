@@ -1,0 +1,21 @@
+type: object
+required:
+  - styles
+properties:
+  styles:
+    type: array
+    items:
+      type: object
+      required:
+        - id
+        - links
+      properties:
+        id:
+          type: string
+        title:
+          type: string
+        links:
+          type: array
+          minItems: 1
+          items:
+            $ref: link.yaml

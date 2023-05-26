@@ -1,0 +1,38 @@
+openapi: 3.0.2
+info:
+  title: OGCAPI
+  version: 0.0.1
+  description: Implemations of OGC API
+  contact:
+    email: kortxyz@gmail.com
+tags:
+  - name: Tile Matrix Sets
+    description: Metadata about tileMatrixSets
+  - name: Collection Tiles
+    description: Data partitioned into a hierarchy of tiles of a collection
+  - name: Styled Tiles
+    description: Data partitioned into a hierarchy of tiles of a collection
+  - name: Dataset Tiles
+    description: Data representations, partitioned into a hierarchy of tiles of one
+      or more geospatial data resources.
+servers:
+  - url: https://localhost
+paths:
+  /tileMatrixSets:
+    $ref: paths/tileMatrixSets.yaml
+  /tileMatrixSets/{tileMatrixSetId}:
+    $ref: paths/tileMatrixSets_{tileMatrixSetId}.yaml
+  /tiles:
+    $ref: paths/tiles.yaml
+  /tiles/{tileMatrixSetId}:
+    $ref: paths/tiles_{tileMatrixSetId}.yaml
+  /tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}:
+    $ref: paths/tiles_{tileMatrixSetId}_{tileMatrix}_{tileRow}_{tileCol}.yaml
+  /collections/{collectionId}/tiles:
+    $ref: paths/collections_{collectionId}_tiles.yaml
+  /collections/{collectionId}/tiles/{tileMatrixSetId}:
+    $ref: paths/collections_{collectionId}_tiles_{tileMatrixSetId}.yaml
+  /collections/{collectionId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}:
+    $ref: paths/collections_{collectionId}_tiles_{tileMatrixSetId}_{tileMatrix}_{tileRow}_{tileCol}.yaml
+  /collections/{collectionId}/styles/{styleId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}:
+    $ref: paths/collections_{collectionId}_styles_{styleId}_tiles_{tileMatrixSetId}_{tileMatrix}_{tileRow}_{tileCol}.yaml

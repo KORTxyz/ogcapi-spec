@@ -1,0 +1,17 @@
+get:
+  operationId: getCollectionStyle
+  tags:
+    - Styles
+  summary: get collectionstyle
+  description: get specific style for the collection
+  parameters:
+    - $ref: ..\components\parameters\collectionId.yaml
+    - $ref: ..\components\parameters\styleId.yaml
+  responses:
+    '200':
+      description: Styles
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true

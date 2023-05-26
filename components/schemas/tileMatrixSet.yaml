@@ -1,0 +1,31 @@
+required:
+  - id
+type: object
+properties:
+  id:
+    type: string
+    description: Tile matrix set identifier,
+    example: WebMercatorQuad
+  title:
+    type: string
+    description: Title of this tile matrix set, normally used for display to a human
+    example: Google Maps Compatible for the World
+  crs:
+    type: string
+    description: Reference to one coordinate reference system (CRS)
+    format: uri
+    example: http://www.opengis.net/def/crs/EPSG/0/3857
+  tileMatrixSetURI:
+    type: string
+    description: Reference to a well-known scale set
+    example: http://www.opengis.net/def/tilematrixset/OGC/1.0/WebMercatorQuad
+  tileMatrix:
+    type: array
+    description: Describes a scale level and its tile matrix
+    items:
+      $ref: .\tileMatrix.yaml
+  orderedAxes:
+    type: array
+    description: Order of the axes.
+    items:
+      type: string

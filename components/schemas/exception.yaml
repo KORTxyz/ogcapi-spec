@@ -1,0 +1,16 @@
+type: object
+description: 'Information about the exception: an error code plus an optional description.'
+required:
+  - statusCode
+properties:
+  statusCode:
+    type: integer
+  error:
+    type: string
+  message:
+    type: string
+
+example:
+  statusCode: 404
+  error: "Not Found"
+  message: 'Route GET:/tileMatrixSets not found'

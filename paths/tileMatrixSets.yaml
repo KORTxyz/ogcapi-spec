@@ -1,0 +1,17 @@
+get:
+  tags:
+  - Tile Matrix Sets
+  summary: fetch all available tile matrix sets (tiling schemes)
+  operationId: getTileMatrixSets
+  parameters:
+    - $ref: ..\components\parameters\f-json.yaml
+
+  responses:
+    "200":
+      description: An array of tile matrix sets (tiling schemes).
+      content:
+        application/json:
+          schema:
+            $ref: ..\components\schemas\tileMatrixSets.yaml
+    "500":
+      $ref: ..\components\responses\ServerError.yaml

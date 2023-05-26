@@ -1,0 +1,36 @@
+get:
+  operationId: getCollections
+  tags:
+    - Capabilities
+  summary: get collections
+  description: Show an overview of collections available in the dataset.
+  parameters:
+    - $ref: ..\components\parameters\fCommon.yaml
+    - $ref: ..\components\parameters\query.yaml
+    - $ref: ..\components\parameters\limit.yaml
+    - $ref: ..\components\parameters\offset.yaml
+    - $ref: ..\components\parameters\bbox.yaml
+  responses:
+    '200':
+      description: Collections in the API
+      content:
+        application/json:
+          schema:
+            $ref: ..\components\schemas\collections.yaml
+    '400':
+      description: >-
+        The server cannot or will not process the request due to an apparent
+        client error. For example, a query parameter had an incorrect value.
+post:
+  operationId: postCollection
+  tags:
+    - Capabilities
+  summary: upload collections
+  description: Upload a collection to the server.
+  responses:
+    '200':
+      description: successfull.
+    '400':
+      description: >-
+        The server cannot or will not process the request due to an apparent
+        client error. For example, a query parameter had an incorrect value.

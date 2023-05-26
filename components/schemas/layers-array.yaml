@@ -1,0 +1,35 @@
+required:
+  - id
+  - type
+type: object
+properties:
+  id:
+    type: string
+    example: '1'
+  type:
+    type: string
+    example: fill
+    enum:
+      - fill
+      - line
+      - symbol
+      - circle
+      - heatmap
+      - fill-extrusion
+      - raster
+      - hillshade
+      - background
+  source:
+    type: string
+    example: daraa
+  source-layer:
+    type: string
+    example: vegetationsrf
+  layout:
+    type: object
+  paint:
+    type: object
+    properties:
+      fill-color:
+        type: string
+        example: '#11083b'

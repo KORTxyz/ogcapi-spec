@@ -1,0 +1,9 @@
+name: styleId
+in: path
+description: |-
+  Local identifier of a style. \
+  A list of all available styles can be found
+  under the /styles path.
+required: true
+schema:
+  type: string

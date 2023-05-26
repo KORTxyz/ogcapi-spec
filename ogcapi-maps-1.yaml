@@ -1,0 +1,17 @@
+openapi: 3.0.2
+info:
+  title: OGCAPI
+  version: 0.0.1
+  description: Implemations of OGC API
+  contact:
+    email: kortxyz@gmail.com
+tags:
+  - name: Maps
+    description: Maps related routes
+servers:
+  - url: https://localhost
+paths:
+  /map:
+    $ref: paths/map.yaml
+  /map/{styleId}:
+    $ref: paths/map_{styleId}.yaml

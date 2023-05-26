@@ -1,0 +1,465 @@
+openapi: 3.0.2
+info:
+  title: OGCAPI
+  version: 0.0.1
+  description: Implemations of OGC API
+  contact:
+    email: kortxyz@gmail.com
+tags:
+  - name: Tile Matrix Sets
+    description: Metadata about tileMatrixSets
+  - name: Collection Tiles
+    description: Data partitioned into a hierarchy of tiles of a collection
+  - name: Styled Tiles
+    description: Data partitioned into a hierarchy of tiles of a collection
+  - name: Dataset Tiles
+    description: >-
+      Data representations, partitioned into a hierarchy of tiles of one or more
+      geospatial data resources.
+servers:
+  - url: https://localhost
+paths:
+  /tileMatrixSets:
+    get:
+      tags:
+        - Tile Matrix Sets
+      summary: fetch all available tile matrix sets (tiling schemes)
+      operationId: getTileMatrixSets
+      parameters:
+        - $ref: '#/components/parameters/f-json'
+      responses:
+        '200':
+          description: An array of tile matrix sets (tiling schemes).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tileMatrixSets'
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /tileMatrixSets/{tileMatrixSetId}:
+    get:
+      tags:
+        - Tile Matrix Sets
+      summary: fetch a tile matrix sets (tiling scheme) by id
+      operationId: getTileMatrixSetDescription
+      parameters:
+        - $ref: '#/components/parameters/fCommon'
+        - $ref: '#/components/parameters/tileMatrixSetId'
+      responses:
+        '200':
+          description: tile matrix sets (a tiling scheme).
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/tileMatrixSet'
+        '404':
+          description: The requested URI was not found
+        '500':
+          description: A server error occurred
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/exception'
+  /tiles:
+    get:
+      operationId: getTilesetList
+      tags:
+        - Dataset Tiles
+      summary: get Tileset List
+      description: Fetch a list of tilematrixsets
+      responses:
+        '200':
+          description: list
+          content:
+            application/json:
+              schema:
+                type: object
+  /tiles/{tileMatrixSetId}:
+    get:
+      operationId: getTileJSON
+      tags:
+        - Dataset Tiles
+      summary: get TileMatrixSet
+      description: Fetch description of a specific tilematrixset
+      parameters:
+        - $ref: '#/components/parameters/tileMatrixSetId'
+      responses:
+        '200':
+          description: tilejson
+          content:
+            application/json:
+              schema:
+                type: object
+        '500':
+          $ref: '#/components/responses/ServerError'
+  /tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}:
+    get:
+      operationId: getTile
+      tags:
+        - Dataset Tiles
+      summary: get Tile
+      description: Fetches a single tile from a collection
+      parameters:
+        - $ref: '#/components/parameters/tileMatrixSetId'
+        - $ref: '#/components/parameters/tileMatrix'
+        - $ref: '#/components/parameters/tileRow'
+        - $ref: '#/components/parameters/tileCol'
+      responses:
+        '200':
+          description: Tile
+          content:
+            image/*:
+              schema:
+                type: string
+                format: binary
+  /collections/{collectionId}/tiles:
+    get:
+      operationId: getCollectionTilesetList
+      tags:
+        - Collection Tiles
+      summary: get Tileset List
+      description: Fetch a list of tilematrixsets
+      parameters:
+        - $ref: '#/components/parameters/collectionId'
+      responses:
+        '200':
+          description: list
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /collections/{collectionId}/tiles/{tileMatrixSetId}:
+    get:
+      operationId: getCollectionTileJSON
+      tags:
+        - Collection Tiles
+      summary: get TileMatrixSet
+      description: Fetch description of a specific tilematrixset
+      parameters:
+        - $ref: '#/components/parameters/collectionId'
+        - $ref: '#/components/parameters/tileMatrixSetId'
+      responses:
+        '200':
+          description: tilejson
+          content:
+            application/json:
+              schema:
+                type: object
+                additionalProperties: true
+  /collections/{collectionId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}:
+    get:
+      operationId: getCollectionTile
+      tags:
+        - Collection Tiles
+      summary: get Tile
+      description: Fetches a single tile from a collection
+      parameters:
+        - $ref: '#/components/parameters/collectionId'
+        - $ref: '#/components/parameters/tileMatrixSetId'
+        - $ref: '#/components/parameters/tileMatrix'
+        - $ref: '#/components/parameters/tileRow'
+        - $ref: '#/components/parameters/tileCol'
+      responses:
+        '200':
+          description: Tile
+          content:
+            image/*:
+              schema:
+                type: string
+                format: binary
+  /collections/{collectionId}/styles/{styleId}/tiles/{tileMatrixSetId}/{tileMatrix}/{tileRow}/{tileCol}:
+    get:
+      operationId: getCollectionStyleTile
+      tags:
+        - Styled Tiles
+      summary: get Tile
+      description: Fetches a single styled tile from a collection
+      parameters:
+        - $ref: '#/components/parameters/collectionId'
+        - $ref: '#/components/parameters/styleId'
+        - $ref: '#/components/parameters/tileMatrixSetId'
+        - $ref: '#/components/parameters/tileMatrix'
+        - $ref: '#/components/parameters/tileRow'
+        - $ref: '#/components/parameters/tileCol'
+      responses:
+        '200':
+          description: Tile
+          content:
+            image/*:
+              schema:
+                type: string
+                format: binary
+components:
+  parameters:
+    f-json:
+      name: f
+      in: query
+      description: |-
+        The format of the response. If no value is provided, the standard http
+        rules apply, i.e., the accept header is used to determine the format.
+
+        The only pre-defined value is "json". The response to other values is
+        determined by the server.
+      required: false
+      style: form
+      explode: false
+      schema:
+        type: string
+        enum:
+          - json
+      example: json
+    fCommon:
+      name: f
+      in: query
+      description: >-
+        Select the output format of the response. If no value is provided, the
+        standard HTTP rules apply, i.e., the accept header will be used to
+        determine the format.
+      required: false
+      schema:
+        type: string
+        enum:
+          - json
+          - html
+    tileMatrixSetId:
+      name: tileMatrixSetId
+      in: path
+      description: ID of the tileMatrixset
+      example: WebMercatorQuad
+      required: true
+      schema:
+        type: string
+    tileMatrix:
+      name: tileMatrix
+      in: path
+      description: z value for the tile
+      required: true
+      schema:
+        type: number
+    tileRow:
+      name: tileRow
+      in: path
+      description: x value for the tile
+      required: true
+      schema:
+        type: number
+    tileCol:
+      name: tileCol
+      in: path
+      description: y value for the tile
+      required: true
+      schema:
+        type: number
+    collectionId:
+      name: collectionId
+      in: path
+      description: local identifier of a collection
+      required: true
+      schema:
+        type: string
+    styleId:
+      name: styleId
+      in: path
+      description: |-
+        Local identifier of a style. \
+        A list of all available styles can be found
+        under the /styles path.
+      required: true
+      schema:
+        type: string
+  schemas:
+    link:
+      required:
+        - href
+        - rel
+        - type
+      type: object
+      properties:
+        rel:
+          type: string
+        type:
+          type: string
+        title:
+          type: string
+        href:
+          type: string
+        templated:
+          type: boolean
+    tileMatrixSets:
+      required:
+        - tileMatrixSets
+      type: object
+      properties:
+        links:
+          type: array
+          items:
+            $ref: '#/components/schemas/link'
+        tileMatrixSets:
+          type: array
+          items:
+            type: object
+            properties:
+              id:
+                type: string
+              title:
+                type: string
+              tileMatrixSetURI:
+                type: string
+              links:
+                type: array
+                items:
+                  $ref: '#/components/schemas/link'
+            example:
+              id: MyWebMercatorQuad
+              title: My Google Maps Compatible for the World
+              links:
+                - href: https://data.example.org/tileMatrixSet/MyWebMercatorQuad
+                  rel: item
+                  type: application/json
+    exception:
+      type: object
+      description: >-
+        Information about the exception: an error code plus an optional
+        description.
+      required:
+        - statusCode
+      properties:
+        statusCode:
+          type: integer
+        error:
+          type: string
+        message:
+          type: string
+      example:
+        statusCode: 404
+        error: Not Found
+        message: Route GET:/tileMatrixSets not found
+    keyword:
+      required:
+        - keyword
+      type: object
+      nullable: true
+      properties:
+        keyword:
+          type: string
+          example: land cover
+        code:
+          type: string
+          example: 4612
+        codeSpace:
+          type: string
+          example: https://www.eionet.europa.eu/gemet/en/concept/
+    tileMatrix:
+      required:
+        - id
+        - matrixHeight
+        - matrixWidth
+        - scaleDenominator
+        - tileHeight
+        - tileWidth
+        - topLeftCorner
+      type: object
+      properties:
+        title:
+          type: string
+          description: Title of this tile matrix, normally used for display to a human
+          example: Google Maps Compatible for the World zoom level 3
+        abstract:
+          type: string
+          description: >-
+            Brief narrative description of this tile matrix, normally available
+            for display to a human
+          example: >-
+            Google Maps Compatible zoom level 3 that is equivalent to a scale of
+            1:69885283.00358972 and has 19567.87924100512 meters of pixel size
+            in the equator
+        keywords:
+          type: array
+          description: keywords about the elements in the collection
+          items:
+            $ref: '#/components/schemas/keyword'
+        id:
+          type: string
+          description: >-
+            Identifier selecting one of the scales defined in the TileMatrixSet
+            and representing the scaleDenominator the tile.
+          example: '3'
+        scaleDenominator:
+          type: number
+          description: Scale denominator level of this tile matrix
+          example: 69885283.00358972
+        topLeftCorner:
+          type: array
+          description: >-
+            Position in CRS coordinates of the top-left corner of this tile
+            matrix
+          example:
+            - -20037508.3427892
+            - 20037508.3427892
+          items:
+            type: number
+            format: double
+        tileWidth:
+          minimum: 1
+          type: number
+          description: Width of each tile of this tile matrix in pixels
+          format: integer
+          example: 256
+        tileHeight:
+          minimum: 1
+          type: number
+          description: Height of each tile of this tile matrix in pixels
+          format: integer
+          example: 256
+        matrixHeight:
+          minimum: 1
+          type: number
+          description: Width of the matrix (number of tiles in width)
+          format: integer
+          example: 8
+        matrixWidth:
+          minimum: 1
+          type: number
+          description: Height of the matrix (number of tiles in height)
+          format: integer
+          example: 8
+    tileMatrixSet:
+      required:
+        - id
+      type: object
+      properties:
+        id:
+          type: string
+          description: Tile matrix set identifier,
+          example: WebMercatorQuad
+        title:
+          type: string
+          description: Title of this tile matrix set, normally used for display to a human
+          example: Google Maps Compatible for the World
+        crs:
+          type: string
+          description: Reference to one coordinate reference system (CRS)
+          format: uri
+          example: http://www.opengis.net/def/crs/EPSG/0/3857
+        tileMatrixSetURI:
+          type: string
+          description: Reference to a well-known scale set
+          example: http://www.opengis.net/def/tilematrixset/OGC/1.0/WebMercatorQuad
+        tileMatrix:
+          type: array
+          description: Describes a scale level and its tile matrix
+          items:
+            $ref: '#/components/schemas/tileMatrix'
+        orderedAxes:
+          type: array
+          description: Order of the axes.
+          items:
+            type: string
+  responses:
+    ServerError:
+      description: A server error occurred.
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/exception'

@@ -1,0 +1,19 @@
+openapi: 3.0.2
+info:
+  title: OGCAPI
+  version: 0.0.7
+  description: Implemations of OGC API
+  contact:
+    email: kortxyz@gmail.com
+tags:
+  - name: Features
+    description: Items from a collection
+servers:
+  - url: https://localhost
+paths:
+  /collections/{collectionId}/items:
+    $ref: paths/collections_{collectionId}_items.yaml
+  /collections/{collectionId}/items/{featureId}:
+    $ref: paths/collections_{collectionId}_items_{featureId}.yaml
+  /collections/{collectionId}/schema:
+    $ref: paths/collections_{collectionId}_schema.yaml

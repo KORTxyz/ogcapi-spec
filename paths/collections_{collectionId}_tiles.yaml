@@ -1,0 +1,16 @@
+get:
+  operationId: getCollectionTilesetList
+  tags:
+    - Collection Tiles
+  summary: get Tileset List
+  description: Fetch a list of tilematrixsets
+  parameters:
+    - $ref: ..\components\parameters\collectionId.yaml
+  responses:
+    '200':
+      description: list
+      content:
+        application/json:
+          schema:
+            type: object
+            additionalProperties: true

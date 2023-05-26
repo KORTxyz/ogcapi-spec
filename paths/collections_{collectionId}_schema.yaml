@@ -1,0 +1,11 @@
+get:
+  operationId: getSchema
+  tags:
+    - Features
+  summary: get Schema
+  description: Fetches a schema for collection
+  parameters:
+    - $ref: ..\components\parameters\collectionId.yaml
+  responses:
+    '200':
+      description: Schema

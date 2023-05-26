@@ -1,0 +1,99 @@
+get:
+  tags:
+    - Use styles
+  summary: information about the available styles
+  operationId: getStyles
+  description: |-
+    This operation fetches the set of styles available. For
+    each style the id, a title, links to the stylesheet of
+    the style in each supported encoding, and the link to the
+    metadata is provided.
+
+    Testbed-15 only requires support for a small number of the
+    styles. Therefore, the currently simple approach is sufficient,
+    but in general the operation should support paging (using a
+    parameter `limit` and links to the `next` page in responses).
+  parameters:
+    - $ref: ..\components\parameters\f-json.yaml
+  responses:
+    '200':
+      description: the set of available styles
+      content:
+        application/json:
+          schema:
+            $ref: ..\components\schemas\style-metadata.yaml
+    '400':
+      description: invalid or unknown query parameters
+    '406':
+      description: |-
+        The media types accepted by the client are not
+        supported for this resource
+post:
+  tags:
+    - Manage styles
+  summary: adds a new style
+  operationId: addStyle
+  description: |-
+    Adds a style to the style repository or just validates
+    a style.
+
+    If the parameter `validate` is set to `yes`, the
+    style will be validated before adding the style to
+    the server. If the parameter `validate` is set to
+    `only`, the server will not be changed and only the
+    validation result will be returned.
+
+    In case, a new style is created, the following rules
+    apply.
+
+    If the style submitted in the request body includes an
+    identifier (this depends on the style encoding), that
+    identifier will be used. If a style with that identifier
+    already exists, an error is returned.
+
+    If no identifier can be determined from the submitted
+    style, the server will assign a new identifier to the
+    style.
+
+    A minimal style metadata resource is created at
+    `/styles/{styleId}/metadata`. Please update the metadata
+    using a PUT request to keep the style metadata consistent
+    with the style definition.
+
+    The URI of the new style is returned in the header
+    `Location`.
+
+    This operation is only available to registered style
+    authors.
+  security:
+    - BasicAuth: []
+  parameters:
+    - $ref: ..\components\parameters\validate.yaml
+  responses:
+    '201':
+      description: style created
+      headers:
+        Location:
+          schema:
+            type: string
+          description: URI of the new style
+    '204':
+      description: style validated successfully, no style has been created
+    '400':
+      description: invalid input, the style is invalid
+    '401':
+      description: unauthorized access
+    '409':
+      description: a style with that id already exists
+  requestBody:
+    description: Stylesheet to be added
+    content:
+      application/vnd.mapbox.style+json:
+        schema:
+          $ref: ..\components\schemas\mb-style.yaml
+      application/vnd.ogc.sld+xml;version=1.0:
+        schema:
+          $ref: ..\components\schemas\sld-10.yaml
+      application/vnd.ogc.sld+xml;version=1.1:
+        schema:
+          $ref: ..\components\schemas\sld-11.yaml

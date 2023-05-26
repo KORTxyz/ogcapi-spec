@@ -1,0 +1,6 @@
+name: tileMatrix
+in: path
+description: z value for the tile
+required: true
+schema:
+  type: number

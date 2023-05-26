@@ -1,0 +1,8 @@
+name: q
+in: query
+description: >-
+  filter collections based on a string. Query check for match in name,
+  description
+required: false
+schema:
+  type: string

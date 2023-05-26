@@ -1,0 +1,7 @@
+name: tileMatrixSetId
+in: path
+description: ID of the tileMatrixset
+example: WebMercatorQuad
+required: true
+schema:
+  type: string

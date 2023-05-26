@@ -1,0 +1,23 @@
+get:
+  tags:
+  - Tile Matrix Sets
+  summary: fetch a tile matrix sets (tiling scheme) by id
+  operationId: getTileMatrixSetDescription
+  parameters:
+    - $ref: ..\components\parameters\fCommon.yaml
+    - $ref: ..\components\parameters\tileMatrixSetId.yaml
+  responses:
+    "200":
+      description: tile matrix sets (a tiling scheme).
+      content:
+        application/json:
+          schema:
+            $ref: ..\components\schemas\tileMatrixSet.yaml
+    "404":
+      description: The requested URI was not found
+    "500":
+      description: A server error occurred
+      content:
+        application/json:
+          schema:
+            $ref: ..\components\schemas\exception.yaml

@@ -1,0 +1,16 @@
+required:
+  - href
+  - rel
+  - type
+type: object
+properties:
+  rel:
+    type: string
+  type:
+    type: string
+  title:
+    type: string
+  href:
+    type: string
+  templated:
+    type: boolean

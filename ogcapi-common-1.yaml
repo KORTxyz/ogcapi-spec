@@ -1,0 +1,28 @@
+openapi: 3.0.2
+info:
+  title: OGCAPI
+  version: 0.0.1
+  description: Implemations of OGC API
+  contact:
+    name: Tino Kastbjerg Stigsen
+    email: info@kort.xyz
+    url: "https://kort.xyz/"
+  license:
+    name: CC-BY 4.0 license
+    url: "https://creativecommons.org/licenses/by/4.0/"
+tags:
+  - name: Capabilities
+    description: essential characteristics of this API
+servers:
+  - url: https://localhost
+paths:
+  /:
+    $ref: paths/landingpage.yaml
+  /conformance:
+    $ref: paths/conformance.yaml
+  /api:
+    $ref: paths/api.yaml
+  /collections:
+    $ref: paths/collections.yaml
+  /collections/{collectionId}:
+    $ref: paths/collections_{collectionId}.yaml

@@ -1,0 +1,23 @@
+type: object
+nullable: true
+required:
+  - id
+properties:
+  id:
+    type: string
+    example: vegetationsrf
+  description:
+    type: string
+    nullable: true
+  type:
+    type: string
+    nullable: true
+    example: polygon
+    enum:
+      - point
+      - line
+      - polygon
+      - geometry
+      - raster
+  attributes: 
+    type: object

@@ -1,0 +1,8 @@
+name: keywords
+in: query
+description: >-
+  filter collections based on keywords. Mulitple keywords are seperated by
+  comma.
+required: false
+schema:
+  type: string

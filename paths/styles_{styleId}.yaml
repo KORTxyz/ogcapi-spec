@@ -1,0 +1,105 @@
+get:
+  tags:
+    - Use styles
+  summary: fetch a style by id
+  description: |-
+    Fetches the style with identifier `styleId`. The set of
+    available styles can be retrieved at `/styles`.
+
+    Not all styles are available in all style encodings.
+  operationId: getStyle
+  parameters:
+    - $ref: ..\components\parameters\styleId.yaml
+    - $ref: ..\components\parameters\f-style.yaml
+  responses:
+    '200':
+      description: The style
+      content:
+        application/vnd.mapbox.style+json:
+          schema:
+            $ref: ..\components\schemas\mb-style.yaml
+        application/vnd.ogc.sld+xml;version=1.0:
+          schema:
+            $ref: ..\components\schemas\sld-10.yaml
+        application/vnd.ogc.sld+xml;version=1.1:
+          schema:
+            $ref: ..\components\schemas\sld-11.yaml
+    '404':
+      description: style not found
+    '406':
+      description: |-
+        The requested style encoding is not supported
+        for this style
+put:
+  tags:
+    - Manage styles
+  summary: replace a style or add a new style
+  description: |-
+    Replace an existing style with the id `styleId`. If no
+    such style exists, a new style with that id is added.
+
+    If the parameter `validate` is set to `yes`, the
+    style will be validated before adding/updating the
+    style. If the parameter `validate` is set to
+    `only`, the server will not be changed and only the
+    validation result will be returned.
+
+    For updated styles, the style metadata resource at
+    `/styles/{styleId}/metadata` is not updated.
+    For new styles a minimal style metadata resource is
+    created, too. Please update the metadata using a PUT
+    request to keep the style metadata consistent with
+    the style definition.
+
+    This operation is only available to registered style
+    authors.
+  operationId: updateStyle
+  security:
+    - BasicAuth: []
+  parameters:
+    - $ref: ..\components\parameters\styleId.yaml
+    - $ref: ..\components\parameters\validate.yaml
+  requestBody:
+    description: A single style in one of the supported style encodings.
+    content:
+      application/json:
+        schema:
+          $ref: ..\components\schemas\mb-style.yaml
+      application/vnd.ogc.sld+xml;version=1.0:
+        schema:
+          $ref: ..\components\schemas\sld-10.yaml
+      application/vnd.ogc.sld+xml;version=1.1:
+        schema:
+          $ref: ..\components\schemas\sld-11.yaml
+  responses:
+    '204':
+      description: style updated, created or validated successfully
+    '400':
+      description: invalid input, the style is invalid
+    '401':
+      description: unauthorized access
+delete:
+  tags:
+    - Manage styles
+  summary: delete a style
+  description: |-
+    Delete an existing style with the id `styleId`. If no
+    such style exists, an error is returned.
+
+    Deleting a style also deletes the subordinate resources,
+    i.e., the style metadata.
+
+    This operation is only available to registered style
+    authors.
+  operationId: deleteStyle
+  security:
+    - BasicAuth: []
+  parameters:
+    - $ref: ..\components\parameters\styleId.yaml
+  responses:
+    '204':
+      description: style deleted
+    '401':
+      description: unauthorized access
+    '404':
+      description: style not found

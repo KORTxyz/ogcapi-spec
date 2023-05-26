@@ -1,0 +1,5 @@
+description: A server error occurred.
+content:
+  application/json:
+    schema:
+      $ref: ..\schemas\exception.yaml
